@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-32">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+ <form action="">
+    <p>Texto</p>
+
+    <textarea ame="msg" id="msg"></textarea>
+
+    <p >Chave</p>
+     <input type="text" name="key" id="key" />
+     <br>
+       <input type="radio" id="cri" name="cripto" value="cri">
+  <label>Criptografar</label><br>
+       <input type="radio" id="de" name="cripto" value="de">
+  <label>Descriptografar</label><br>
+   </form>
+    <button type="button" onclick="cesar()">cesar</button>
+    <button type="button" onclick="alert('Hello world!')">xor</button>
+    <button type="button" onclick="alert('Hello world!')">s-des</button>
+    <button type="button" onclick="des()">des</button>
+    <button type="button" onclick="aes()">aes</button>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
+<p id="result3"></p>
+<p id="result"></p>
+<p id="result2"></p>
+
+
+<script src="script.js"></script>
+  </body>
+</html>
