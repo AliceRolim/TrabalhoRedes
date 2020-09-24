@@ -11,8 +11,9 @@
  <form action="">
     <p>Texto</p>
 
-    <textarea ame="msg" id="msg"></textarea>
-
+    <textarea name="msg" id="msg"></textarea>
+<input type="checkbox" id="bina" name="cripto">
+  <label>Binário</label><br>
     <p >Chave</p>
      <input type="text" name="key" id="key" />
      <br>
@@ -20,19 +21,20 @@
   <label>Criptografar</label><br>
        <input type="radio" id="de" name="cripto" value="de">
   <label>Descriptografar</label><br>
-  
+
    </form>
    <br><br>
     <button type="button" onclick="cesar()">cesar</button>
-    <button type="button" onclick="alert('em andamento')">xor</button>
+    <button type="button" onclick="xor()">xor</button>
     <button type="button" onclick="sdes()">s-des</button>
     <button type="button" onclick="des()">des</button>
     <button type="button" onclick="aes()">aes</button>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
-<p id="result3"></p>
+<p>Resultado:</p>
 <p id="result"></p>
+<p id="textores"></p>
 <p id="result2"></p>
 
     </div>

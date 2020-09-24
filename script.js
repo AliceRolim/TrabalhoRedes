@@ -18,11 +18,12 @@ res=encrypted
 res=hex_to_ascii(decrypted);
  crp="dec"
   }else{
-   erro()
+   erro("Falta dados a serem inseridos")
   }
 }
-
-document.getElementById("result2").innerHTML=res
+document.getElementById("textores").innerHTML="";
+document.getElementById("result2").innerHTML="";
+document.getElementById("result").innerHTML=res
 
 }
 
@@ -50,12 +51,12 @@ res=hex_to_ascii(decrypted);
 
  crp="dec"
   }else{
-   erro()
+   erro("Falta dados a serem inseridos")
   }
 }
-
-
-document.getElementById("result2").innerHTML=res
+document.getElementById("textores").innerHTML="";
+document.getElementById("result2").innerHTML="";
+document.getElementById("result").innerHTML=res
  }
 
 
@@ -79,7 +80,8 @@ document.getElementById("result2").innerHTML=res
      {
 		 hex = Number(tam.charCodeAt(i))
     key= parseInt(key);
-    var aux=(hex+(key%255)).toString(16);
+    console.log(key%256)
+    var aux=(hex+(key%256)).toString(16);
 	    ar.push(aux);
 	 }
  res=hex_to_ascii(ar.join(''));
@@ -92,24 +94,53 @@ document.getElementById("result2").innerHTML=res
      {
 		 hex = Number(tam.charCodeAt(i))
     key= parseInt(key);
-    var aux=(hex-(key%255)).toString(16);
+    var aux=(hex-(key%256)).toString(16);
 	    ar.push(aux);
 	 }
  res=hex_to_ascii(ar.join(''));
 
   }else{
-   erro()
+   erro("Falta dados a serem inseridos")
   }
 
 }
-
-document.getElementById("result2").innerHTML=res
+document.getElementById("result2").innerHTML=ar;
+document.getElementById("textores").innerHTML="hexadecimal:";
+document.getElementById("result").innerHTML=res
  }
 
- function erro(){
- return alert("Falta dados a serem inseridos")
+ function erro(str){
+ return alert(str)
  }
 
+function xor(){
+  var msg = document.getElementById("msg").value;
+  var key = document.getElementById("key").value;
+  var cri = document.getElementById("cri").checked;
+  var dec = document.getElementById("de").checked;
+  var bina = document.getElementById("bina").checked;
+  var res ="";
+  var p1
+  var p2
+  var p3=[]
+
+  for(var i=0;i<msg.length;i++){
+  
+ p1=StrtoBinary(msg[i])
+ p2=ou(p1,key)
+ p3[i]=p2
+
+  }
+  res=BinarytoStr(p3.join(""))
+
+ if(key!=null&&(key.length<8||key.length>8)){
+       erro("o numero de caracteres da chave precisa ser 8")
+       return 0;
+ }
+ document.getElementById("textores").innerHTML="Binário:";
+document.getElementById("result").innerHTML=res;
+document.getElementById("result2").innerHTML=p3;
+}
 
 
     function sdes(){
@@ -119,24 +150,60 @@ document.getElementById("result2").innerHTML=res
   var cri = document.getElementById("cri").checked;
   var dec = document.getElementById("de").checked;
   var res ="";
+  var bina = document.getElementById("bina").checked;
+
+
   var auxres =[]
   var auxres2 =[]
-  
-
+  var bin=[]
+  var bin2=[]
+ if(key!=null&&(key.length<10||key.length>10)){
+       erro("o numero de caracteres da chave precisa ser 10")
+       return 0;
+ }
   var ck=[]
   ck=configkey(key,msg)
 
   var k01=ck[0];
   var k02=ck[1];
-
 console.log(k01)
 console.log(k02)
+if(cri){
+var p1
+var auxp1=[]
 
-  if(cri){
 console.log("----------criptografando----------")
 for(var i=0;i<msg.length;i++){
-  
-var p1=AsciitoBinary(msg[i])
+    if(!bina){
+    p1=StrtoBinary(msg[i])
+        
+    var p2=ip(p1)
+    var p3= fk(p2,k01)
+    var p4=sw(p3)
+    console.log("SW "+p4)
+    console.log("--------------------")
+    var p5= fk(p4,k02)
+    var p6=ipn1(p5)
+    bin2[i]=p6
+    auxres[i]=BinarytoStr(p6);
+    console.log(p6)
+    console.log(auxres[i])
+    }
+    res=auxres.join('');
+
+    console.log("res: "+auxres)
+
+  }else{
+
+
+    if(msg[i]==","){
+p1=StrtoBinary(msg[i])
+    }else{
+       auxp1[i]=msg[i]
+    }
+ 
+
+
 var p2=ip(p1)
 var p3= fk(p2,k01)
 var p4=sw(p3)
@@ -144,15 +211,17 @@ console.log("SW "+p4)
 console.log("--------------------")
 var p5= fk(p4,k02)
 var p6=ipn1(p5)
-auxres[i]=BinarytoAscii(p6);
-
+bin2[i]=p6
+auxres[i]=BinarytoStr(p6);
 console.log(p6)
 console.log(auxres[i])
-
 }
 res=auxres.join('');
 
 console.log("res: "+auxres)
+
+  }
+
 
 
   }else{
@@ -161,7 +230,7 @@ console.log("----------descriptografando----------")
 
 for(var j=0;j<msg.length;j++){
 
-var p1=AsciitoBinary(msg[j])
+var p1=StrtoBinary(msg[j])
 var p2=ip(p1)
 var p3= fk(p2,k02)
 var p4=sw(p3)
@@ -169,38 +238,45 @@ console.log("SW "+p4)
 console.log("--------------------")
 var p5= fk(p4,k01)
 var p6=ipn1(p5)
-auxres2[j]=BinarytoAscii(p6);
+bin2[j]=p6
+auxres2[j]=BinarytoStr(p6);
 
 }
 res=auxres2.join('');
       }else{
-          erro()
+          erro("Falta dados a serem inseridos")
       }
 
   }
 
-document.getElementById("result2").innerHTML=res;
 
+console.log(bin)
+console.log(bin2)
+document.getElementById("textores").innerHTML="Binário:";
+document.getElementById("result2").innerHTML=bin;
+document.getElementById("result2").innerHTML=bin2;
+document.getElementById("result").innerHTML=res;
 }
+
 function configkey(k,bts){
-     var p010=p10(k)
+  var p010=p10(k)
 
-var aux=ls1e(p010)+ls1d(p010)
-
-
-var p08=p8(aux)
-var k1=p08
-
-var aux2=ls2e(aux)+ls2d(aux)
-var p18=p8(aux2)
-var k2=p18
-
-var res=[]
-res[0]=k1
-res[1]=k2
+  var aux=ls1e(p010)+ls1d(p010)
 
 
-return res
+  var p08=p8(aux)
+  var k1=p08
+
+  var aux2=ls2e(aux)+ls2d(aux)
+  var p18=p8(aux2)
+  var k2=p18
+
+  var res=[]
+  res[0]=k1
+  res[1]=k2
+
+
+  return res
 }
 
 function ls1e(bts){
@@ -459,7 +535,7 @@ function s1(bts){
 
 }
 
-function AsciitoBinary(str) {
+function StrtoBinary(str) {
 		var result = "";
     
 		for (var i = 0; i < str.length; i++) {
@@ -475,7 +551,7 @@ function AsciitoBinary(str) {
 }
 
 
-function BinarytoAscii (str) {
+function BinarytoStr (str) {
 		var result = "";
 		var arr = str.match(/.{1,8}/g);
 		for (var i = 0; i < arr.length; i++) {
