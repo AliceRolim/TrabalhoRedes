@@ -151,8 +151,8 @@ document.getElementById("result2").innerHTML=p3;
   var dec = document.getElementById("de").checked;
   var res ="";
   var bina = document.getElementById("bina").checked;
-
-
+  var k=0
+var auxp1=[]
   var auxres =[]
   var auxres2 =[]
   var bin=[]
@@ -170,10 +170,12 @@ console.log(k01)
 console.log(k02)
 if(cri){
 var p1
-var auxp1=[]
+
 
 console.log("----------criptografando----------")
 for(var i=0;i<msg.length;i++){
+
+var p1=StrtoBinary(msg[i])
 var p2=ip(p1)
 var p3= fk(p2,k01)
 var p4=sw(p3)
@@ -185,18 +187,42 @@ bin2[i]=p6
 auxres[i]=BinarytoStr(p6);
 console.log(p6)
 console.log(auxres[i])
-}
 res=auxres.join('');
-
 console.log("res: "+auxres)
 
+}
   }else{
       if(de){
 console.log("----------descriptografando----------")
 
-for(var j=0;j<msg.length;j++){
+  
+  if(bina){
+    for(var j=0;j<msg.length+1;j++){
+    if(msg[j]==','||msg[j]==null){
+console.log(auxp1.join(''))
+var p2=ip(auxp1.join(''))
+var p3= fk(p2,k02)
+var p4=sw(p3)
+console.log("SW "+p4)
+console.log("--------------------")
+var p5= fk(p4,k01)
+var p6=ipn1(p5)
+bin2[j]=p6
+auxres2[j]=BinarytoStr(p6);
+auxp1=[]
+k=0}
+    
+if(msg[j]==','){
+j++}
 
+auxp1[k]=msg[j]
+k++
+    }
+}else{
+  
+for(var j=0;j<msg.length;j++){
 var p1=StrtoBinary(msg[j])
+
 var p2=ip(p1)
 var p3= fk(p2,k02)
 var p4=sw(p3)
@@ -206,7 +232,7 @@ var p5= fk(p4,k01)
 var p6=ipn1(p5)
 bin2[j]=p6
 auxres2[j]=BinarytoStr(p6);
-
+}
 }
 res=auxres2.join('');
       }else{
