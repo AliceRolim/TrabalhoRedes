@@ -118,12 +118,11 @@ document.getElementById("result2").innerHTML=res
   var key = document.getElementById("key").value;
   var cri = document.getElementById("cri").checked;
   var dec = document.getElementById("de").checked;
-  var res ="";
   var auxres =[]
   var auxres2 =[]
   
 
-  var ck=[]
+    var ck=[]
   ck=configkey(key,msg)
 
   var k01=ck[0];
@@ -149,10 +148,7 @@ auxres[i]=BinarytoAscii(p6);
 console.log(p6)
 console.log(auxres[i])
 
-}
-res=auxres.join('');
-
-console.log("res: "+auxres)
+}console.log("res: "+auxres)
 
 
   }else{
@@ -168,10 +164,7 @@ var p4=sw(p3)
 console.log("SW "+p4)
 console.log("--------------------")
 var p5= fk(p4,k01)
-var p6=ipn1(p5)
-auxres2[j]=BinarytoAscii(p6);
-
-}
+var p6=i
 res=auxres2.join('');
       }else{
           erro()
