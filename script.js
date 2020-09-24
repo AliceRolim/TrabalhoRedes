@@ -166,7 +166,7 @@ console.log("--------------------")
 var p5= fk(p4,k01)
 var p6=i
 res=auxres2.join('');
-      }else{
+      }}else{
           erro()
       }
 
