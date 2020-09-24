@@ -21,7 +21,7 @@ res=hex_to_ascii(decrypted);
    erro("Falta dados a serem inseridos")
   }
 }
-document.getElementById("textores").innerHTML="";
+document.getElementById("textores").innerHTML="Binário:";
 document.getElementById("result2").innerHTML="";
 document.getElementById("result").innerHTML=res
 
@@ -54,7 +54,7 @@ res=hex_to_ascii(decrypted);
    erro("Falta dados a serem inseridos")
   }
 }
-document.getElementById("textores").innerHTML="";
+
 document.getElementById("result2").innerHTML="";
 document.getElementById("result").innerHTML=res
  }
@@ -174,36 +174,6 @@ var auxp1=[]
 
 console.log("----------criptografando----------")
 for(var i=0;i<msg.length;i++){
-    if(!bina){
-    p1=StrtoBinary(msg[i])
-        
-    var p2=ip(p1)
-    var p3= fk(p2,k01)
-    var p4=sw(p3)
-    console.log("SW "+p4)
-    console.log("--------------------")
-    var p5= fk(p4,k02)
-    var p6=ipn1(p5)
-    bin2[i]=p6
-    auxres[i]=BinarytoStr(p6);
-    console.log(p6)
-    console.log(auxres[i])
-    }
-    res=auxres.join('');
-
-    console.log("res: "+auxres)
-
-  }else{
-
-
-    if(msg[i]==","){
-p1=StrtoBinary(msg[i])
-    }else{
-       auxp1[i]=msg[i]
-    }
- 
-
-
 var p2=ip(p1)
 var p3= fk(p2,k01)
 var p4=sw(p3)
@@ -219,10 +189,6 @@ console.log(auxres[i])
 res=auxres.join('');
 
 console.log("res: "+auxres)
-
-  }
-
-
 
   }else{
       if(de){
